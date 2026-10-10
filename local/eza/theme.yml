@@ -1,0 +1,11 @@
+colourful: false
+filekinds:
+  normal:
+    foreground: "#CCCCCC"
+  directory:
+    foreground: "#888888"
+  executable:
+    foreground: "#FFFFFF"
+  symlink:
+    foreground: "#666666"
+

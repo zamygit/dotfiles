@@ -1,0 +1,147 @@
+/*****----- Configuration -----*****/
+
+configuration {
+    modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               " ";
+    drun-display-format:        "{name}";
+}
+
+/*****----- Global Properties -----*****/
+@import                          "shared/colors.rasi"
+@import                          "shared/fonts.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  true;
+    width:                       1366px;
+    height:                      768px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     20px;
+    margin:                      0px;
+    padding:                     50px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    background-color:            @background-alt;
+    /* Barra de búsqueda centrada y compacta */
+    margin:                      0px calc(50% - 130px);
+    padding:                     7px 15px;
+    spacing:                     10px;
+    border:                      1px solid;
+    border-radius:               10px;
+    border-color:                @selected;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @selected;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      text;
+    placeholder:                 "Buscar..";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       5; 
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     30px;
+    margin:                      30px calc(50% - 600px);
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     15px;      /* Espacio entre icono y texto */
+    margin:                      0px;
+    padding:                     20px 10px;
+    border:                      0px solid;
+    border-radius:               30px;      /* Bordes redondeados al seleccionar */
+    background-color:            transparent;
+    text-color:                  @foreground;
+    orientation:                 vertical;  /* <--- ESTO pone el icono sobre el texto */
+    cursor:                      pointer;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+element selected.normal {
+    background-color:            rgba(255, 255, 255, 0.1); /* Fondo sutil al seleccionar */
+    text-color:                  @foreground;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        72px;      /* Tamaño grande estilo Zorin/GNOME */
+    cursor:                      inherit;
+    horizontal-align:            0.5;       /* Centra el icono horizontalmente */
+    vertical-align:              0.5;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;       /* Centra el texto debajo del icono */
+}
+
+
+
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     100px;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+
+textbox {
+    background-color:            @background;
+    text-color:                  @foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

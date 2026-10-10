@@ -1,0 +1,7 @@
+[input]
+method = pulse
+
+[color]
+foreground = '#FF0000'
+background = '#000000' ; Fondo negro para mejor contraste
+gradient = 0
