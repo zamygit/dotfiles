@@ -10,24 +10,21 @@ NC='\033[0m'
 echo -e "-----------------------------------------------"
 echo -e "${GREEN}"
 cat << 'EOF'
-     _        _      __ _ _ 
-    | |      | |    / _|(_)| |
-  __| |  ___| |_  |_ _  | |  ___  ___
+     _         _       __ _ _ 
+    | |       | |     / _|(_)| |
+  __| |  ___| |_  |_ _  | |   ___  ___
  / _` | / _ \ | __||  _|| || | / _ \/ __|
 | (_| || (_) || |_ | |  | || ||  __/\__ \
  \__,_| \___/  \__||_|  |_||_| \___||___/
 EOF
 echo -e "${NC}                ${YELLOW}by.zamygit${NC}"
-echo -e "${NC}                ${YELLOW}i3+polybar+rofi${NC}"
+echo -e "${NC}                ${YELLOW}i3+polybar+rofi+zsh${NC}"
 echo -e "-----------------------------------------------"
-
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-
 sudo -v
 while true; do sudo -v; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 
 echo -e "${BLUE}[+] Actualizando repositorios e instalando paquetes oficiales...${NC}"
 sudo pacman -Syu --noconfirm
@@ -37,8 +34,7 @@ sudo pacman -S --noconfirm \
     rofi alacritty picom udiskie feh python-psutil lxappearance lightdm-gtk-greeter-settings \
     breeze base-devel rust unzip nemo firefox git polybar cava pavucontrol \
     mtpfs libmtp gvfs-mtp eza discord code kitty \
-    networkmanager network-manager-applet networkmanager-openvpn
-
+    networkmanager network-manager-applet networkmanager-openvpn zsh
 
 if ! command -v paru &> /dev/null; then
     echo -e "${BLUE}[+] Instalando Paru desde AUR...${NC}"
@@ -50,7 +46,6 @@ if ! command -v paru &> /dev/null; then
     cd - || exit
     rm -rf /tmp/paru
 fi
-
 
 echo -e "${BLUE}[+] Instalando paquetes desde AUR...${NC}"
 paru -S --noconfirm --needed \
@@ -65,20 +60,28 @@ paru -S --noconfirm --needed \
     ttf-iosevka-nerd \
     riseup-vpn
 
-
-echo -e "${BLUE}[+] Copiando configuraciones de 'local/' a '~/.config/'...${NC}"
+echo -e "${BLUE}[+] Copiando configuraciones de 'local/' a sus destinos...${NC}"
 mkdir -p ~/.config
 
 if [ -d "$SCRIPT_DIR/local" ]; then
+    # Copiar carpetas de configuracion a ~/.config/
     for config_dir in "$SCRIPT_DIR/local"/*/; do
         if [ -d "$config_dir" ]; then
             dir_name=$(basename "$config_dir")
-            echo -e "${YELLOW} -> Aplicando: $dir_name${NC}"
+            echo -e "${YELLOW} -> Aplicando config: $dir_name${NC}"
             rm -rf ~/.config/"$dir_name"
             cp -rf "$config_dir" ~/.config/
         fi
     done
 
+    # Copiar el archivo .zshrc o zshrc suelto en local/ hacia el home del usuario
+    if [ -f "$SCRIPT_DIR/local/.zshrc" ]; then
+        cp -f "$SCRIPT_DIR/local/.zshrc" ~/.zshrc
+        echo -e "${YELLOW} -> Aplicando: .zshrc en el directorio home${NC}"
+    elif [ -f "$SCRIPT_DIR/local/zshrc" ]; then
+        cp -f "$SCRIPT_DIR/local/zshrc" ~/.zshrc
+        echo -e "${YELLOW} -> Aplicando: zshrc como ~/.zshrc en el home${NC}"
+    fi
 
     [ -f ~/.config/rofi/launcher.sh ] && chmod +x ~/.config/rofi/launcher.sh
     [ -f ~/.config/rofi/powermenu.sh ] && chmod +x ~/.config/rofi/powermenu.sh
@@ -86,13 +89,17 @@ else
     echo -e "${RED}[!] Error: No se encontró la carpeta 'local' al lado de install.sh${NC}"
 fi
 
+echo -e "${BLUE}[+] Cambiando la shell por defecto a Zsh...${NC}"
+if [ -n "$SUDO_USER" ]; then
+    chsh -s "$(which zsh)" "$SUDO_USER"
+else
+    chsh -s "$(which zsh)"
+fi
 
 echo -e "${BLUE}[+] Habilitando NetworkManager y limpiando accesos directos...${NC}"
 sudo systemctl enable --now NetworkManager
 
-
 sudo pacman -Rns --noconfirm xterm 2>/dev/null || true
-
 
 DESKTOPS_TO_REMOVE=(
     avahi-discover.desktop breezestyleconfig.desktop bssh.desktop bvnc.desktop
