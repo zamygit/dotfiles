@@ -3,12 +3,17 @@ set $mod Mod4
 exec --no-startup-id i3-msg "workspace 1"
 exec --no-startup-id i3-msg "workspace 2"
 exec --no-startup-id i3-msg "workspace 3"
+
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id feh --bg-fill ~/.config/wallpaper/5.jpg
+exec --no-startup-id feh --bg-fill ~/.config/wallpaper/z.jpg
 exec --no-startup-id sleep 1; bash ~/.config/polybar/launch.sh
 exec --no-startup-id xrandr --output DP-3 --mode 1280x1024 --rate 75.02
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
+exec_always --no-startup-id setxkbmap -layout us,es
+
+
+bindsym Mod4+space exec --no-startup-id xkb-switch -n
 
 font pango:Iosevka Nerd Font 8
 
@@ -21,7 +26,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 tiling_drag modifier titlebar
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 bindsym $mod+w kill
 bindsym $mod+q exec --no-startup-id bash ~/.config/rofi/launcher.sh
 
@@ -40,7 +45,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 set $ws1 "1"

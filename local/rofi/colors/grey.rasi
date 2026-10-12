@@ -1,0 +1,13 @@
+/**
+ * Colores generales
+
+ **/
+
+* {
+    background:     #000000FF;
+    background-alt: #121212FF;
+    foreground:     #FFFFFFFF;
+    selected:       #333333FF;
+    active:         #888888FF;
+    urgent:         #E0E0E0FF;
+}

@@ -1,0 +1,11 @@
+ERROR: Duplicate keybinding in config file:
+  state mask 0x40 with keysym space, command "focus mode_toggle"
+ERROR: FYI: You are using i3 version 4.25.1
+ERROR: Received ConfigureNotify for unknown window 0x01600000
+ERROR: Received ConfigureNotify for unknown window 0x01600000
+ERROR: Received ConfigureNotify for unknown window 0x01600007
+ERROR: Received ExposeEvent for unknown window 0x01600007
+ERROR: Received ConfigureNotify for unknown window 0x01600007
+ERROR: Received ConfigureNotify for unknown window 0x01600007
+ERROR: Received ExposeEvent for unknown window 0x01600007
+ERROR: Received ConfigureNotify for unknown window 0x01600007
