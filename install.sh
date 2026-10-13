@@ -34,7 +34,7 @@ sudo pacman -S --noconfirm \
     rofi alacritty picom udiskie feh python-psutil lxappearance lightdm-gtk-greeter-settings \
     breeze base-devel rust unzip nemo firefox git polybar cava pavucontrol \
     mtpfs libmtp gvfs-mtp eza discord code kitty \
-    networkmanager network-manager-applet networkmanager-openvpn zsh
+    networkmanager network-manager-applet networkmanager-openvpn zsh maim xclip swappy
 
 if ! command -v paru &> /dev/null; then
     echo -e "${BLUE}[+] Instalando Paru desde AUR...${NC}"
